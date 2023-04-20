@@ -1,44 +1,52 @@
-package QUESTION1;
+package Q1;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-public class Q1 
-{
-    public static void main( String[] args ) throws InterruptedException
-    {
-    	WebDriverManager.chromedriver().setup();
-		ChromeOptions co = new ChromeOptions();
-		co.addArguments("--remote-allow-origins=*");
-		WebDriver driver=new ChromeDriver(co);
-		driver.get("https://www.amazon.in/ASUS-15-6-inch-Integrated-Transparent-X515MA-BR011W/dp/B09SGGB687?ref_=Oct_DLandingS_D_2c2d3a50_61&th=1");
-		driver.manage().window().maximize();
-		String title=driver.getTitle();
-		System.out.println(title);
-		if(title.equals("Amazon.in: Buy ASUS VivoBook 15 (2021), 15.6-inch (39.62 cm) HD, Dual Core Intel Celeron N4020, Thin and Light Laptop (4GB RAM/256GB SSD/Integrated Graphics/Windows 11 Home/Transparent Silver/1.8 Kg), X515MA-BR011W Online at Low Prices in India | ASUS Reviews & Ratings")) {
-			System.out.println("Verified title of the page");
-		}else {
-			System.out.println("Title not matched");
-		}
-		JavascriptExecutor js=(JavascriptExecutor) driver;
-    	js.executeScript("window.scrollBy(0,1000)","");
-    	
-    	
-		driver.findElement(By.id("add-to-cart-button")).click();
-		System.out.println("Verified Add to Cart button");
-		
-		String lnk=driver.findElement(By.id("//*[@id=\"authportal-main-section\"]/div[2]/div/div[1]/form/div/div/div/h1")).getText();
-		if(lnk.equals("Sign in")) {
-			System.out.println("Sign in page landed");
-		}else {
-			System.out.println("Wrong page landed");
-		}
-		
-    	driver.quit();
-    }
+
+public class Q1 {
+  WebDriver d;
+  @Test
+  public void f() throws InterruptedException {
+ ChromeOptions co=new ChromeOptions();
+ co.addArguments("--remote-allow-origins=*");
+ WebDriverManager.chromedriver().setup();
+ d=new ChromeDriver(co);
+ d.get("https://www.yatra.com/flights");
+ d.manage().window().maximize();
+ Thread.sleep(4000);
+ d.findElement(By.xpath("//*[@id=\"booking_engine_flights\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_form_wrapper\"]/div[1]/div[1]/ul[1]/li[2]/a")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_origin_city\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_form_wrapper\"]/div[1]/div[2]/ul/li[1]/ul/li[1]/div/div/ul/div/div/div/li[3]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_form_wrapper\"]/div[1]/div[2]/ul/li[1]/ul/li[3]/div/div/ul/div/div/div/li[4]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_origin_date\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"20/04/2023\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_arrival_date\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"24/04/2023\"]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_paxInfoBox\"]/i")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_passengerBox\"]/div[1]/div[1]/div/div/span[2]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"flight_class_select_child\"]/ul/li[3]")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_form_wrapper\"]/div[3]/div[1]/div[1]/a/i")).click();
+ Thread.sleep(2000);
+ d.findElement(By.xpath("//*[@id=\"BE_flight_flsearch_btn\"]")).click();
+  
+  }
 }
+		
